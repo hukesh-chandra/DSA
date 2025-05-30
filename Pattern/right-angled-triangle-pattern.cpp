@@ -80,20 +80,38 @@ void alphabet1(int n){
     }
 }
 
-void alphabet2(int n){  //unsolved 15
+void alphabet2(int n){  
         for(int i = 0;i<n;i++){
-        for(char ch='A';ch>'A'+i;ch--){
-            cout<<"* ";
+        for(char j='A';j< 'A'+n-i;j++){
+            cout<<j<<" ";
         }
         cout<<endl;
     }
 }
 
+void alphabet3(int n){
+        for(int i = 0;i<n;i++){
+        for(int j = 0;j<=i;j++){
+            cout<<char('A'+i)<<" ";
+            
+        }
+        cout<<endl;
+    }
+}
 
+void alphabet4(int n){
+        for(int i = 0;i<n;i++){
+        for(int j = 0;j<=i;j++){
+            cout<<char('A'+n+j-i-1)<<" ";
+            
+        }
+        cout<<endl;
+    }
+}
 
 int main(){
     int n;
     cin>>n;
-    alphabet1(n);
+    alphabet4(n);
     return 0;
 }
