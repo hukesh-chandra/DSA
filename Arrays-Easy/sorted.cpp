@@ -31,6 +31,25 @@ int removeDuplicates(int arr[], int n)
   return i + 1;
 }
 
+void Reverse(vector<int> &arr,int start,int end){
+    while(start<=end){
+        swap(arr[start],arr[end]);
+        start++;
+        end--;
+    }
+}
+
+void RotateToRight(vector<int> &arr,int n,int k){
+    Reverse(arr,0,n-k-1);
+    Reverse(arr,n-k,n-1);
+    Reverse(arr,0,n-1);
+}
+
+void RotateToLeft(vector<int> &arr,int n,int k){
+    Reverse(arr,0,k-1);
+    Reverse(arr,k,n-1);
+    Reverse(arr,0,n-1);
+}
 
 int main(){
     int n;
