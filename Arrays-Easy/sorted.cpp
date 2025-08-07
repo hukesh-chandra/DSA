@@ -19,7 +19,7 @@ void LeftRotateByOne(vector<int> &arr,int n){
     }
 }
 
-int removeDuplicates(int arr[], int n)
+int RemoveDuplicates(int arr[], int n)
 {
   int i = 0;
   for (int j = 1; j < n; j++) {
