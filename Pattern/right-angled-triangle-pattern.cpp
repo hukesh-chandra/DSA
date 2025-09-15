@@ -112,6 +112,6 @@ void alphabet4(int n){
 int main(){
     int n;
     cin>>n;
-    alphabet4(n);
+    number1(n);
     return 0;
 }
