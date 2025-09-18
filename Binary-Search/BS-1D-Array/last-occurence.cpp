@@ -44,23 +44,68 @@ int totalOccurrence(int n, int target, vector<int>& arr) {
     return last - first + 1;
 }
 
-int searchRotated(vector<int> arr,int target){
-    int idx=-1;
-    int low=0;
-    int high=arr.size();
-    while(low<=high){
-        int mid = low + (high-low)/2;
-        if(arr[mid]==target){
-            return mid;
+int searchRotated(vector<int>& arr, int target) {
+    int low = 0, high = arr.size() - 1;
+    
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if (arr[mid] == target) return mid;
+
+        // Left half is sorted
+        if (arr[low] <= arr[mid]) {
+            if (target >= arr[low] && target < arr[mid]) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
         }
-        if(target<=arr[arr.size()] && arr[mid]>target){
-            low =mid+1;
-        }
-        else{
-            high = mid-1;
+        // Right half is sorted
+        else {
+            if (target > arr[mid] && target <= arr[high]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
     }
-    return idx;
+    
+    return -1;
+}
+
+int searchRotated1(vector<int>& arr, int target) {
+    int low = 0, high = arr.size() - 1;
+    
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if (arr[mid] == target) return mid;
+
+        if (arr[low] == arr[mid] && arr[mid] == arr[high]) {
+            low++;
+            high--;
+            continue;
+        }
+
+        // Left half is sorted
+        if (arr[low] <= arr[mid]) {
+            if (target >= arr[low] && target < arr[mid]) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        // Right half is sorted
+        else {
+            if (target > arr[mid] && target <= arr[high]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+    }
+    
+    return -1;
 }
 
 int main() {
