@@ -20,7 +20,6 @@ int Factorial(int n)
     }
 
     return n * Factorial(n - 1);
-    ;
 }
 
 void printArray(int arr[], int n)
@@ -63,7 +62,7 @@ int main()
 {
     int n;
     cin >> n;
-    Fibannoci(n, 0, 1);
+    cout<<Factorial(n);
 
     return 0;
 }
