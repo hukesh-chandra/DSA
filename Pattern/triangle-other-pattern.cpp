@@ -136,6 +136,6 @@ int main()
 {
     int n;
     cin >> n;
-    diamond3(n);
+    diamond2(n);
     return 0;
 }
