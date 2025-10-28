@@ -49,7 +49,8 @@ bool CheckPalindrome(string a, int n, int i)
 }
 
 auto Fibannoci(int n, int one, int two)
-{if (n <= 0)
+{
+    if (n <= 0)
         return;
 
     cout << one << ", ";
@@ -60,9 +61,8 @@ auto Fibannoci(int n, int one, int two)
 
 int main()
 {
-    int n;
-    cin >> n;
-    cout<<Factorial(n);
-
+    // int n;
+    // cin >> n;
+    cout<<CheckPalindrome("naman",0,1);
     return 0;
 }
