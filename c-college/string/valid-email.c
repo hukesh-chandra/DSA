@@ -9,14 +9,18 @@ int main(){
     gets(email);
     // Validate email
     for(int i = 0; email[i] != '\0'; i++){
-        if(email[i] == ' ' || email[i] == '_' || email[i] == '.'){
-            printf("Invalid email\n");
-            return 0;
+        if(email[i] == '_' || email[i] == '.' || (email[i] >= 'a' && email[i] <= 'z') || (email[i] >= 'A' && email[i] <= 'Z') || (email[i] >= '0' && email[i] <= '9')){
+            continue;
         }
         else if(email[i] == '@'){
             at_position = i;
             break;
-        }
+        
+        }   
+         else{
+            printf("Invalid email: invalid character '%c'.\n", email[i]);
+            return 0;
+            }
     }
     if(at_position == -1){
         printf("Invalid email: missing '@' symbol.\n");
