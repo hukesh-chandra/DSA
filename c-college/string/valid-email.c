@@ -1,42 +1,52 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(){
+int main() {
     char email[100];
-    int at_position = -1;
-    int dot_position = -1;
+    int at_position = -1, dot_position = -1;
+    int at_count = 0;
+
     printf("Enter an email address: ");
-    gets(email);
-    // Validate email
-    for(int i = 0; email[i] != '\0'; i++){
-        if(email[i] == '_' || email[i] == '.' || (email[i] >= 'a' && email[i] <= 'z') || (email[i] >= 'A' && email[i] <= 'Z') || (email[i] >= '0' && email[i] <= '9')){
-            continue;
-        }
-        else if(email[i] == '@'){
+    fgets(email, sizeof(email), stdin);
+    email[strcspn(email, "\n")] = '\0'; // remove newline
+
+    // Validate characters and find '@'
+    for (int i = 0; email[i] != '\0'; i++) {
+        char c = email[i];
+        if (c == '@') {
             at_position = i;
-            break;
-        
-        }   
-         else{
-            printf("Invalid email: invalid character '%c'.\n", email[i]);
+            at_count++;
+        } else if (!(c == '_' || c == '.' || 
+                     (c >= 'a' && c <= 'z') || 
+                     (c >= 'A' && c <= 'Z') || 
+                     (c >= '0' && c <= '9'))) {
+            printf("Invalid email: invalid character '%c'.\n", c);
             return 0;
-            }
-    }
-    if(at_position == -1){
-        printf("Invalid email: missing '@' symbol.\n");
-        return 0;
-    }
-    for(int i = at_position + 1; email[i] != '\0'; i++){
-        if(email[i] == '.'){
-            dot_position = i;
-            break;
         }
     }
 
-    if(dot_position == -1 || (strcmp(&email[dot_position], ".com") != 0 && strcmp(&email[dot_position], ".org") != 0 && strcmp(&email[dot_position], ".net") != 0)){
-        printf("Invalid email: incorrect domain name.\n");
+    if (at_count != 1) {
+        printf("Invalid email: must contain exactly one '@'.\n");
         return 0;
     }
+
+    // Find the last dot after '@'
+    for (int i = at_position + 1; email[i] != '\0'; i++) {
+        if (email[i] == '.') dot_position = i;
+    }
+
+    if (dot_position == -1 || dot_position < at_position) {
+        printf("Invalid email: missing or misplaced domain dot.\n");
+        return 0;
+    }
+
+    if (strcmp(&email[dot_position], ".com") != 0 &&
+        strcmp(&email[dot_position], ".org") != 0 &&
+        strcmp(&email[dot_position], ".net") != 0) {
+        printf("Invalid email: unsupported domain extension.\n");
+        return 0;
+    }
+
     printf("Valid email address.\n");
     return 0;
 }
