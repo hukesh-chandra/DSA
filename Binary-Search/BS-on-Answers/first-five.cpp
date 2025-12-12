@@ -67,51 +67,54 @@ int kokobanana(int n,vector<int> a,int h){
     return low;
 }
 
-int calculatenum(vector<int> arr,int mid){
-    int d =0;
-    for(int a : arr){
-        a-=mid;
-        if(a<=0){
-            d++;
+int calculatenum(const vector<int>& arr, int day, int k) {
+    int bouquets = 0;
+    int consec = 0;
+    for (int val : arr) {
+        if (val <= day) {
+            consec++;
+            if (consec == k) {
+                bouquets++;
+                consec = 0;
+            }
+        } else {
+            consec = 0;
         }
     }
-    return d;
+    return bouquets;
 }
 
-int bouquets(int n,vector<int> arr,int m,int k){
-    int low =1;
+int bouquets(int n, const vector<int>& arr, int m, int k) {
+    if (1LL * m * k > n) return -1;
+
+    int low = 0;                        
     int high = findMax(arr);
-    if(m*k>n){
-        return -1;
-    }
-    
+    int ans = -1;
 
-    while(low<=high){
-        int mid = (low+high)/2;
-        int num = calculatenum(arr,mid);
-        if(n*m == num){
-            return mid;
-        }
-        if(n*m<num){
-            high =mid-1;
-        }else{
-            low =mid+1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        int num = calculatenum(arr, mid, k);
+        if (num >= m) {                  
+            ans = mid;
+            high = mid - 1;
+        } else {
+            low = mid + 1;
         }
     }
-    return low;
+
+    return ans;
 }
 
-int main(){
-    int n;
-    cin>>n;
-    int m;
-    cin>>m;
-    int a;
-    cin>>a;
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int k, m, a;
+    if (!(cin >> k >> m >> a)) return 0;
+
     vector<int> arr(a);
-    for(int i = 0; i<n;i++){
-        cin>>arr[i];
-    }
-    cout<<kokobanana(n,arr,m);
+    for (int i = 0; i < a; ++i) cin >> arr[i];
+
+    cout << bouquets(a, arr, m, k) << '\n';
     return 0;
 }
