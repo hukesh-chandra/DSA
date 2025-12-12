@@ -105,6 +105,26 @@ int bouquets(int n, const vector<int>& arr, int m, int k) {
     return ans;
 }
 
+int  smallestDivisor(int n,const vector<int>& arr,int threshold){
+    int low = 1;
+    int high = findMax(arr);
+    while(low<=high){
+        int mid = low + (high - low)/2;
+        int sum =0;
+        for(int val : arr){
+            sum += val+ mid -1 / mid;
+            if (sum > threshold) break;
+        } 
+        if(sum<=threshold){
+            high = mid -1;
+        }else{
+            low = mid +1;
+        }
+    }
+    return low;
+}
+
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
