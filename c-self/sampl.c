@@ -1,17 +1,13 @@
 #include <stdio.h>
-//arithmetic operations on string 
-int main(){
-    char *ch;
-    int length;
-    printf("Enter the length of the string: ");
-    scanf("%d", &length);
-    ch = (char *)malloc((length + 1) * sizeof(char));
-    printf("Enter the string: ");
-    scanf("%s", ch);
-    printf("You entered: %s\n", ch);
-    char a = ch[0] + 3;
-    printf("After adding 3 to first character: %c\n", a);
-    free(ch);
-    return 0;
 
+char main(){
+    int n=0;
+    int a,b;
+    while(n<10){
+        printf("Hello, World!\n");
+         a = n++;
+         b= ++n;
+    }
+    printf("%d %d ", a , b);
+    return '0';
 }
