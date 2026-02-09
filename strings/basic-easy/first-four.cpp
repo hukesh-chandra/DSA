@@ -115,9 +115,30 @@ bool isomorphicString(string str1,string str2){
 bool checkRotation(string str1,string str2){
     string result = str1+str1;
     for(int i = 0;i<str1.size();i++){
-        strcpy
-        strcmp()
+        string sub = result.substr(i,str1.size());
+        if(sub==str2){
+            return true;
+        }
     } 
+    return false;
+}
+
+bool anagram(string str1,string str2){
+    map<char,int> mp1;
+    map<char,int> mp2;
+    for(char x: str1){
+        mp1[x]++;
+    }
+    for(char x:str2){
+        mp2[x]++;
+    }
+
+    for(int i = 'A';i<='Z';i++){
+        if(mp1[i]!=mp2[i]){
+            return false;
+        }
+    }
+    return true;
 }
 
 
@@ -132,7 +153,7 @@ int main(){
     // for(string &x:str){
     //     cin>>x;
     // }
-    cout<<isomorphicString(str1,str2);
+    cout<<anagram(str1,str2);
 
     return 0;
 }
