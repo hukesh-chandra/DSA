@@ -3,9 +3,6 @@ using namespace std;
 
 #define fast_io ios::sync_with_stdio(false); cin.tie(NULL);
 
-
-#define endl '\n'
-
 using ll = long long;
 using vi = vector<int>;
 using vll = vector<long long>;
@@ -17,20 +14,34 @@ template<typename T>
 void read(vector<T> &a) {
     for (auto &x : a) cin >> x;
 }
+
 template<typename T>
-void write(vector<T> &a){
-    for(auto &x: a) cout<<x<<" ";
+void write(const vector<T> &a){
+    for (auto &x : a) cout << x << " ";
 }
 
-int32_t main(){
+int main(){
     fast_io;
 
-    int t;
-    cin>>t;
-    while(t--){
-        int n;
-        cin>>n;
 
-        cout<<endl;
-    }
+        int n;
+        cin >> n;
+
+        vi v(n-1);
+        read(v);
+
+        vi a;
+
+        int i = n - 2;
+
+        while(i > 0){
+            a.pb(i+2);
+            i = v[i] - 2;
+        }
+        if(i==0) a.pb(2);
+        a.pb(1);
+
+        reverse(all(a));
+        write(a);
+        cout << '\n';
 }

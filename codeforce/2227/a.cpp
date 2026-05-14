@@ -28,8 +28,15 @@ int32_t main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
+        int x,y;
+        cin>>x>>y;
+
+        if(x%2!=0 && y%2!=0){
+            cout<<"NO";
+        }
+        else{
+            cout<<"YES";
+        }
 
         cout<<endl;
     }

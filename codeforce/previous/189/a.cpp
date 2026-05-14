@@ -1,10 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define fast_io ios::sync_with_stdio(false); cin.tie(NULL);
 
 
-#define endl '\n'
 
 using ll = long long;
 using vi = vector<int>;
@@ -22,14 +20,16 @@ void write(vector<T> &a){
     for(auto &x: a) cout<<x<<" ";
 }
 
-int32_t main(){
+
+int main(){
     fast_io;
 
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
+        ll x,y;
+        cin>>x>>y;
+        
 
         cout<<endl;
     }

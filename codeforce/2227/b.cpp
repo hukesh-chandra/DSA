@@ -30,6 +30,20 @@ int32_t main(){
     while(t--){
         int n;
         cin>>n;
+        string s;
+        cin>>s;
+        int o = 0;
+        int c = 0;
+        for(char x:s){
+            if(x=='(') o++;
+            if(x==')') c++;
+        }
+
+        if(o==c){
+            cout<<"YES";
+        }else{
+            cout<<"NO";
+        }
 
         cout<<endl;
     }
