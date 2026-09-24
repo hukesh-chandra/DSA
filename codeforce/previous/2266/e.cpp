@@ -28,7 +28,6 @@ void write(vector<T> &a) {
 
 // ---------- Number Theory ----------
 
-// GCD
 ll gcd(ll a, ll b) {
     while (b) {
         a %= b;
@@ -36,12 +35,6 @@ ll gcd(ll a, ll b) {
     }
     return a;
 }
-
-
-// Extended GCD
-// Returns g = gcd(a,b)
-// Also finds x,y such that:
-// a*x + b*y = g
 
 ll extended_gcd(ll a, ll b, ll &x, ll &y) {
 
@@ -61,40 +54,95 @@ ll extended_gcd(ll a, ll b, ll &x, ll &y) {
     return g;
 }
 
-
-// LCM
 ll lcm(ll a, ll b) {
     return (a / gcd(a, b)) * b;
 }
 
-
-// Modular Exponentiation
-// Calculates (a^b) % mod in O(log b)
-
 ll modpow(ll a, ll b, ll mod) {
     ll ans = 1;
     a %= mod;
+
     while (b > 0) {
         if (b & 1) {
             ans = ans * a % mod;
         }
+
         a = a * a % mod;
         b >>= 1;
     }
+
     return ans;
 }
 
+
+
+
+void sieve(vi &spf, int n) {
+
+    for (int i = 2; i <= n; i++) {
+
+        if (spf[i] != 0) {
+            continue;
+        }
+
+        for (int j = i; j <= n; j += i) {
+
+            if (spf[j] == 0) {
+                spf[j] = i;
+            }
+        }
+    }
+}
+
+
 int32_t main() {
     fast_io;
+
+    const int MAXN = 200000;
+
+    vi spf(MAXN + 1);
+    sieve(spf, MAXN);
 
     int t;
     cin >> t;
 
     while (t--) {
 
-        int n;
-        cin >> n;
+        int n, k;
+        cin >> n >> k;
 
-        cout << endl;
+        vi a(n);
+        read(a);
+
+        vll dp(n + 1, 0);
+
+        for (int x = k + 1; x <= n; x++) {
+
+            ll best = LLONG_MAX;
+            int y = x;
+
+            while (y > 1) {
+
+                int p = spf[y];
+
+                best = min(best, 1LL + p * dp[x / p]);
+
+                while (y % p == 0) {
+                    y /= p;
+                }
+            }
+
+            dp[x] = best;
+        }
+
+        ll ans = 0;
+
+        for (int x : a) {
+            ans += dp[x];
+        }
+
+        cout << ans << endl;
     }
+
+    return 0;
 }

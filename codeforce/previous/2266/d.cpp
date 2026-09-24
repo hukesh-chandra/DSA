@@ -28,7 +28,6 @@ void write(vector<T> &a) {
 
 // ---------- Number Theory ----------
 
-// GCD
 ll gcd(ll a, ll b) {
     while (b) {
         a %= b;
@@ -36,12 +35,6 @@ ll gcd(ll a, ll b) {
     }
     return a;
 }
-
-
-// Extended GCD
-// Returns g = gcd(a,b)
-// Also finds x,y such that:
-// a*x + b*y = g
 
 ll extended_gcd(ll a, ll b, ll &x, ll &y) {
 
@@ -61,28 +54,26 @@ ll extended_gcd(ll a, ll b, ll &x, ll &y) {
     return g;
 }
 
-
-// LCM
 ll lcm(ll a, ll b) {
     return (a / gcd(a, b)) * b;
 }
 
-
-// Modular Exponentiation
-// Calculates (a^b) % mod in O(log b)
-
 ll modpow(ll a, ll b, ll mod) {
     ll ans = 1;
     a %= mod;
+
     while (b > 0) {
         if (b & 1) {
             ans = ans * a % mod;
         }
+
         a = a * a % mod;
         b >>= 1;
     }
+
     return ans;
 }
+
 
 int32_t main() {
     fast_io;
@@ -95,6 +86,35 @@ int32_t main() {
         int n;
         cin >> n;
 
-        cout << endl;
+        vll a(n);
+        read(a);
+
+        vll c(n);
+
+        for (int i = 0; i < n; i++) {
+            c[i] = a[i] - (i + 1);
+        }
+
+        sort(all(c));
+
+        c.erase(unique(all(c)), c.end());
+
+        int ans = 1;
+        int cur = 1;
+
+        for (int i = 1; i < c.size(); i++) {
+
+            if (c[i] == c[i - 1] + 1) {
+                cur++;
+            } else {
+                cur = 1;
+            }
+
+            ans = max(ans, cur);
+        }
+
+        cout << ans << endl;
     }
+
+    return 0;
 }

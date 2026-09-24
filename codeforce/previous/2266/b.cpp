@@ -87,14 +87,22 @@ ll modpow(ll a, ll b, ll mod) {
 int32_t main() {
     fast_io;
 
-    int t;
+    ll t;
     cin >> t;
 
     while (t--) {
 
-        int n;
-        cin >> n;
-
+        int a,b,c;
+        cin >> a>>b>>c;
+        if(a>=b){
+            cout<<a+c-b;
+        }else{
+            if((b-a)>(a+c-b)){
+                cout<<b-a;
+            }else{
+                cout<<a+c-b;
+            }
+        }
         cout << endl;
     }
 }

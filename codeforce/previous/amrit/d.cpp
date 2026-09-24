@@ -91,9 +91,25 @@ int32_t main() {
     cin >> t;
 
     while (t--) {
-
-        int n;
+        int x;
+        cin>>x;
+        string n;
         cin >> n;
+
+        int cnt = 0;
+            int i =0;
+            while(n.size()>2){
+
+                if(cnt>(4*x)){
+                    break;
+                }
+                if(((i+2)>=n.size()) && n[i]==n[i+2]){
+                    n.erase(i+1,1);
+                    cnt = 0;
+                    i = 0;
+                }else i++;
+            }
+        cout<<n.size();
 
         cout << endl;
     }

@@ -94,7 +94,12 @@ int32_t main() {
 
         int n;
         cin >> n;
+        vi a(n);
+        vi p(n);
+        read(a);
+        read(p);
 
+        
         cout << endl;
     }
 }

@@ -94,7 +94,23 @@ int32_t main() {
 
         int n;
         cin >> n;
+        vi v(n);
+        read(v);
 
+        int cnt = 0;
+
+        for(int x: v){
+            if(x==1) cnt++;
+        }
+
+        if(cnt > (n/2)){
+            cout<<"Bessie";
+        }else if(cnt==n/2 && n%2==0){
+            cout<<"Bessie";
+        }
+        else{
+            cout<<"Elsie";
+        }
         cout << endl;
     }
 }

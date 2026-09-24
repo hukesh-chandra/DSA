@@ -94,7 +94,10 @@ int32_t main() {
 
         int n;
         cin >> n;
-
+        vi v(3);
+        read(v);
+        sort(all(v));
+        cout<<n-v[0];
         cout << endl;
     }
 }

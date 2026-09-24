@@ -28,7 +28,6 @@ void write(vector<T> &a) {
 
 // ---------- Number Theory ----------
 
-// GCD
 ll gcd(ll a, ll b) {
     while (b) {
         a %= b;
@@ -36,12 +35,6 @@ ll gcd(ll a, ll b) {
     }
     return a;
 }
-
-
-// Extended GCD
-// Returns g = gcd(a,b)
-// Also finds x,y such that:
-// a*x + b*y = g
 
 ll extended_gcd(ll a, ll b, ll &x, ll &y) {
 
@@ -61,28 +54,26 @@ ll extended_gcd(ll a, ll b, ll &x, ll &y) {
     return g;
 }
 
-
-// LCM
 ll lcm(ll a, ll b) {
     return (a / gcd(a, b)) * b;
 }
 
-
-// Modular Exponentiation
-// Calculates (a^b) % mod in O(log b)
-
 ll modpow(ll a, ll b, ll mod) {
     ll ans = 1;
     a %= mod;
+
     while (b > 0) {
         if (b & 1) {
             ans = ans * a % mod;
         }
+
         a = a * a % mod;
         b >>= 1;
     }
+
     return ans;
 }
+
 
 int32_t main() {
     fast_io;
@@ -95,6 +86,39 @@ int32_t main() {
         int n;
         cin >> n;
 
-        cout << endl;
+        string s;
+        cin >> s;
+
+        int zcount = 0;
+
+        for (char x : s) {
+            if (x == '0') {
+                zcount++;
+            }
+        }
+        if (s[0]=='1') {
+            cout << zcount << endl;
+            continue;
+        }
+
+        int oc = 0;
+        int zs = zcount;
+        int ans = n;
+
+        for (int i = 0; i < n; i++) {
+
+
+            if (s[i] == '1') {
+                oc++;
+            } else {
+                zs--;
+            }
+
+            ans = min(ans, oc + zs);
+        }
+
+        cout << ans << endl;
     }
+
+    return 0;
 }
